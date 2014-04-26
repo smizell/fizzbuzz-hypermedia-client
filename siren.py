@@ -52,10 +52,17 @@ class SirenBase:
         """
         Boolean to tell if response has a link relation
         """
+        # See if the link relation is in the links
         if self.has_links():
             for link in self.links:
                 if link_rel in link["rel"]:
                     return True
+
+        # See if the link relation is embedded
+        if self.has_embedded(link_rel):
+            return True
+
+        # Link relation wasn't found
         return False
 
     def follow_link(self, link_rel, params={}):
@@ -66,9 +73,12 @@ class SirenBase:
         if self.has_embedded(link_rel):
             return SirenEmbedded(self.embedded(link_rel))
 
+        # If the resource is linked, return a new resource
         for link in self.links:
             if link_rel in link["rel"]:
                 return SirenResource(self.base_url, link["href"], params=params)
+
+        # Nothing was found
         return None
 
     def has_embedded(self, link_rel):

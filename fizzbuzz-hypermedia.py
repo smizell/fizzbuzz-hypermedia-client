@@ -1,4 +1,4 @@
-from siren import SirenResource
+from siren import SirenResource as Hyperclient
 
 BASE_URL = "http://127.0.0.1:3000"
 
@@ -8,7 +8,7 @@ def fizzbuzz(resource):
     """
     print resource.properties["value"]
 
-    if resource.has_link("next") or resource.has_embedded("next"):
+    if resource.has_link("next"):
         fizzbuzz(resource.follow_link("next"))
 
 def begin_fizzbuzz(resource):
@@ -27,7 +27,7 @@ def custom_fizzbuzz(root_resource, params):
 
 if __name__ == '__main__':
     # Get the root resource from the API
-    root_resource = SirenResource(BASE_URL, path="/", params={"embed": 1})
+    root_resource = Hyperclient(BASE_URL, path="/", params={"embed": 1})
 
     # Start from the beginning
     #begin_fizzbuzz(root_resource)
