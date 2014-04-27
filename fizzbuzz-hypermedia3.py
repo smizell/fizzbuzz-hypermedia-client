@@ -1,6 +1,6 @@
 from siren import SirenResource as Hyperclient
 
-BASE_URL = "http://127.0.0.1:3000"
+BASE_URL = "http://fizzbuzzaas.herokuapp.com"
 
 def fizzbuzz(resource):
     """
@@ -25,13 +25,6 @@ def custom_fizzbuzz(root_resource, params):
     resource = root_resource.take_action("custom-fizzbuzz", params)
     begin_fizzbuzz(resource)
 
-if __name__ == '__main__':
-    # Get the root resource from the API
-    root_resource = Hyperclient(BASE_URL, path="/", params={"embed": 1})
-
-    # Start from the beginning
-    #begin_fizzbuzz(root_resource)
-
-    # Use a custom fizzbuzz
-    params = { "embed": 1 }
-    custom_fizzbuzz(root_resource, params)
+root_resource = Hyperclient(BASE_URL, path="/")
+params = { "embed": True }
+custom_fizzbuzz(root_resource, params)

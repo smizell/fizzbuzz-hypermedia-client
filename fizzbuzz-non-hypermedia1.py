@@ -9,6 +9,4 @@ def fizzbuzz(params):
     return response_json["properties"]["value"]
 
 for number in range(1, 101):
-    print fizzbuzz({"number": number, "firstNumber": 4})
-
-
+    print fizzbuzz({"number": number })
