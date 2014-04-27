@@ -16,4 +16,4 @@ def fizzbuzz(params):
     if params["number"] <= ENDS_AT:
         fizzbuzz(params)
 
-fizzbuzz({"number": STARTS_AT, "firstNumber": 4})
+fizzbuzz({ "number": STARTS_AT })
